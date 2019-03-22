@@ -1,0 +1,41 @@
+body
+{
+  background-color: black;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+#title
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#title h1
+{
+  font-size: 10em;
+}
+
+#title button
+{
+  font-size: 2em;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #B82601;
+  border-style: none;
+  color: white;
+}
+
+#title button:hover
+{
+  transition: .1s;
+  background-color: gray;
+  color: white;
+}
+
+button:focus
+{
+  outline: 0;
+}
