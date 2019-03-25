@@ -4,13 +4,19 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="./css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="draw.js"></script>
+
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script src="./js/processing.js"></script>
+
+    <script src="./js/draw.js"></script>
+    <script src="./js/ui.js"></script>
+
     <title>Boids Simulation</title>
   </head>
   <body>
     <div id="title">
       <h1>Boids.</h1>
-      <button>Start</button>
+      <button onclick="titleStart();">Start</button>
     </div>
     <div class="container">
       <canvas id="draw-canvas"></canvas>
