@@ -184,8 +184,8 @@ class Boid {
 
       if (SHOW_RELEVANCE_ELLIPSE)
       {
-        processing.stroke(0, 0, 255);
-        processing.fill(0, 0, 255);
+        processing.stroke(255, 255, 255);
+        processing.fill(0, 0, 0, 0);
         processing.ellipse(canvasPosition.x, canvasPosition.y, DIST_RELEVANCE, DIST_RELEVANCE);
       }
 
