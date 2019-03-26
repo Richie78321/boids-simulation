@@ -1,11 +1,17 @@
 var CANVAS_PADDING = 5;
 var BACKGROUND_COLOR = [0, 0, 0];
+var START_NUM = 50;
 
+var IS_INIT = false;
 function initCanvas()
 {
-  var canvas = document.getElementById('draw-canvas');
-  var processing = new Processing(canvas, initProcessing);
-  processing.size(window.innerWidth - CANVAS_PADDING, window.innerHeight - CANVAS_PADDING);
+  if (!IS_INIT)
+  {
+    var canvas = document.getElementById('draw-canvas');
+    var processing = new Processing(canvas, initProcessing);
+    processing.size(window.innerWidth - CANVAS_PADDING, window.innerHeight - CANVAS_PADDING);
+    IS_INIT = true;
+  }
 }
 
 function initProcessing(processing)
@@ -18,6 +24,11 @@ function initProcessing(processing)
       processing.size(window.innerWidth - CANVAS_PADDING, window.innerHeight - CANVAS_PADDING);
     });
     processing.background(BACKGROUND_COLOR[0], BACKGROUND_COLOR[1], BACKGROUND_COLOR[2]);
+
+    for (let i = 0; i < START_NUM; i++)
+    {
+      boids.push(new Boid(new PVector(Math.random() * (window.innerWidth - CANVAS_PADDING), Math.random() * (window.innerHeight - CANVAS_PADDING)), Math.random() * Math.PI * 2, [Math.random() * 255, Math.random() * 255, Math.random() * 255]));
+    }
   }
 
   processing.draw = function()

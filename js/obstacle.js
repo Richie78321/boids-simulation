@@ -11,16 +11,14 @@ class Obstacle
 
   getAvoidanceMagnitude(boid, processing)
   {
-    //This sucks
-    var boidCanvasPos = boid.getCanvasPosition(processing);
-    var velocityVector = new PVector(MOVE_VEL * Math.cos(boid.heading), MOVE_VEL * Math.sin(boid.heading));
-    var angleToBoid = Math.atan2(boidCanvasPos.y - this.position.y, boidCanvasPos.x - this.position.x);
+    var canvasPosition = boid.getCanvasPosition(processing);
+    var velocityVector = new PVector(Math.cos(boid.heading), Math.sin(boid.heading));
+    var obstacleVector = new PVector(this.position.x - canvasPosition.x, this.position.y - canvasPosition.y);
+    var angleBetween = Math.atan2(obstacleVector.x * velocityVector.y - obstacleVector.y * velocityVector.x, obstacleVector.x * velocityVector.x + obstacleVector.y * velocityVector.y);
 
-    var avoidanceMagnitude = OBSTACLE_INTENSITY / Math.pow(getDistance(boidCanvasPos, this.position), 2);
-    var avoidanceVector = new PVector(avoidanceMagnitude * Math.cos(angleToBoid), avoidanceMagnitude * Math.sin(angleToBoid));
-    avoidanceVector.add(velocityVector);
-
-    return Math.atan2(avoidanceVector.y, avoidanceVector.x) - Math.atan2(velocityVector.y, velocityVector.x);
+    var avoidanceMagnitude = OBSTACLE_INTENSITY / Math.pow(getDistance(canvasPosition, this.position), 2);
+    if (angleBetween >= 0) return avoidanceMagnitude;
+    else return -avoidanceMagnitude;
   }
 
   draw(processing)

@@ -23,5 +23,36 @@
     <div class="container">
       <canvas id="draw-canvas"></canvas>
     </div>
+    <div id="control-container">
+      <form name="sim_control" oninput="updateControls()">
+        <table>
+          <tr>
+            <td>Move Velocity</td>
+            <td><input type="range" class="slider" name="move_vel" min=".1" max="10" value="1" step="any"></td>
+            <td><output name="move_vel_val">1</output></td>
+          </tr>
+          <tr>
+            <td>View Range</td>
+            <td><input type="range" class="slider" name="relevance" min="10" max="200" value="50" step="any"></td>
+            <td><output name="relevance_val">50</output></td>
+          </tr>
+          <tr>
+            <td>Crowd Dist</td>
+            <td><input type="range" class="slider" name="crowd_dist" min="0" max="100" value="25" step="any"></td>
+            <td><output name="crowd_dist_val">25</output></td>
+          </tr>
+          <tr>
+            <td>Obs Intensity</td>
+            <td><input type="range" class="slider" name="obstacle_intensity" min="0" max="100" value="20" step="any"></td>
+            <td><output name="obstacle_intensity_val">20</output></td>
+          </tr>
+          <tr>
+            <td>Show Range</td>
+            <td><input type="checkbox" class="checkbox" name="show_range"></td>
+          </tr>
+        </table>
+        <button id="toggle-controls-button" onclick="toggleControls(); return false;">Show Controls</button>
+      </form>
+    </div>
   </body>
 </html>

@@ -31,7 +31,7 @@ canvas
   font-size: 10em;
 }
 
-#title button
+button
 {
   padding: 15px 25px;
   font-size: 24px;
@@ -43,17 +43,17 @@ canvas
   border: none;
   border-radius: 15px;
 
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
-#title button:hover
+button:hover
 {
   background-color: gray;
-  box-shadow: 2px 5px #fff;
+  box-shadow: 1px 3px #fff;
   color: white;
 }
 
-#title button:active
+button:active
 {
   transition: 0s;
   background-color: #B82601;
@@ -62,4 +62,65 @@ canvas
 button:focus
 {
   outline: 0;
+}
+
+#control-container
+{
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  transform: translateY(-80%);
+  transition: transform .3s;
+}
+
+#control-container button
+{
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+  padding: 10px 20px;
+  width: 250px;
+}
+
+#control-container tr
+{
+  height: 30px;
+}
+
+.checkbox
+{
+  transform: scale(2);
+}
+
+.slider
+{
+  -webkit-appearance: none;
+  height: 25px;
+  background: #062F4F;
+  outline: none;
+  opacity: .8;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover
+{
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb
+{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #813772;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #813772;
+  cursor: pointer;
 }
