@@ -45,7 +45,7 @@ class Boid {
 
       //Average position heading
       var avgPosHeading = this.getAveragePositionHeading(relevantBoids, processing);
-      this.heading += AVG_POS_HEADING_WEIGHT * (avgPosHeading - this.heading);
+      this.heading += AVG_POS_HEADING_WEIGHT * avgPosHeading;
 
       //Obstacle heading
       this.heading += this.getObstacleAvoidanceDelta(obstacles, processing);
@@ -67,10 +67,23 @@ class Boid {
         avgPos.div(boids.length);
 
         var canvasPos = this.getCanvasPosition(processing);
-        var targetHeading = Math.atan2(avgPos.y - canvasPos.y, avgPos.x - canvasPos.x);
-        if (getDistance(avgPos, canvasPos) < TARGET_CROWDING_DIST) return (targetHeading + Math.PI) % (Math.PI * 2);
-        else return targetHeading;
-      } else return this.heading;
+	      var averageVector = new PVector(avgPos.x - canvasPos.x, avgPos.y - canvasPos.y);
+	      var headingVector = new PVector(Math.cos(this.heading), Math.sin(this.heading));
+
+        var deltaHeading = Math.atan2(headingVector.x * averageVector.y - headingVector.y * averageVector.x, headingVector.x * averageVector.x + headingVector.y * averageVector.y);
+        if (getDistance(avgPos, canvasPos) < TARGET_CROWDING_DIST)
+        {
+          if (deltaHeading < 0)
+          {
+            return Math.PI - Math.abs(deltaHeading);
+          }
+          else
+          {
+            return -(Math.PI - Math.abs(deltaHeading));
+          }
+        }
+        else return deltaHeading;
+      } else return 0;
     }
 
     //Finds the average heading of surrounding birds
