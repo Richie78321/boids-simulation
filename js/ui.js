@@ -1,3 +1,4 @@
+//Starts the simulation when the start button is pressed
 function titleStart()
 {
   initCanvas();
@@ -9,6 +10,7 @@ function titleStart()
 
 var DECIMAL_ROUND = 3;
 var INPUTS = ["move_vel", "relevance", "crowd_dist", "obstacle_intensity"]
+//Updates the control table when the controls are interacted with
 function updateControls()
 {
   var simControlForm = document.forms.sim_control;
@@ -28,6 +30,7 @@ function updateControls()
   OBSTACLE_INTENSITY = simControlForm.obstacle_intensity.value;
 }
 
+//Toggles the control window (dropdown menu)
 var CONTROLS_SHOWN = false;
 function toggleControls()
 {

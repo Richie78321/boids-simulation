@@ -5,6 +5,7 @@ var START_NUM = 50;
 var IS_INIT = false;
 function initCanvas()
 {
+  //Initializes the canvas
   if (!IS_INIT)
   {
     var canvas = document.getElementById('draw-canvas');
@@ -16,21 +17,25 @@ function initCanvas()
 
 function initProcessing(processing)
 {
+  //Initializes the processing window
   var boids = [];
   var obstacles = [];
   processing.setup = function()
   {
+    //Resets canvas size when the window is resized
     $(window).resize(() => {
       processing.size(window.innerWidth - CANVAS_PADDING, window.innerHeight - CANVAS_PADDING);
     });
     processing.background(BACKGROUND_COLOR[0], BACKGROUND_COLOR[1], BACKGROUND_COLOR[2]);
 
+    //Spawns initial set of birds
     for (let i = 0; i < START_NUM; i++)
     {
       boids.push(new Boid(new PVector(Math.random() * (window.innerWidth - CANVAS_PADDING), Math.random() * (window.innerHeight - CANVAS_PADDING)), Math.random() * Math.PI * 2, [Math.random() * 255, Math.random() * 255, Math.random() * 255]));
     }
   }
 
+  //Defines the drawing loop
   processing.draw = function()
   {
     processing.background(BACKGROUND_COLOR[0], BACKGROUND_COLOR[1], BACKGROUND_COLOR[2]);
@@ -56,19 +61,23 @@ function initProcessing(processing)
     }
   }
 
+  //Defines what happens when the canvas is clicked by the mouse
   processing.mouseClicked = function()
   {
     if (processing.mouseButton == processing.LEFT)
     {
+      //Adds a new bird
       boids.push(new Boid(new PVector(processing.mouseX, processing.mouseY), Math.random() * Math.PI * 2, [Math.random() * 255, Math.random() * 255, Math.random() * 255]));
     }
     else
     {
+      //Adds an obstacle
       obstacles.push(new Obstacle(new PVector(processing.mouseX, processing.mouseY)));
     }
   }
 }
 
+//Rotates a point around a defined axis
 function rotatePoint(point, axis, rotation)
 {
   var relPoint = new PVector(point.x, point.y);

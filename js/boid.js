@@ -2,6 +2,7 @@
 var BOID_WIDTH = 7.5;
 var BOID_HEIGHT = 10;
 
+//Creates boid body
 function getBoidBody(position, heading)
 {
   var bodyVerts = [];
@@ -13,7 +14,7 @@ function getBoidBody(position, heading)
   return bodyVerts;
 }
 
-//Add angle relevance
+//Constant declarations
 var DIST_RELEVANCE = 50;
 var MOVE_VEL = 1;
 var AVG_HEADING_WEIGHT = .075;
@@ -56,6 +57,7 @@ class Boid {
       this.position.add(Math.cos(this.heading) * MOVE_VEL, Math.sin(this.heading) * MOVE_VEL);
     }
 
+    //Finds the required change in heading to move towards the average position of surrouding birds
     getAveragePositionHeading(boids, processing)
     {
       if (boids.length > 0)
@@ -71,6 +73,7 @@ class Boid {
       } else return this.heading;
     }
 
+    //Finds the average heading of surrounding birds
     getAverageHeading(boids)
     {
       if (boids.length > 0)
@@ -82,6 +85,7 @@ class Boid {
       else return this.heading;
     }
 
+    //Reaches the average color of the surrounding birds
     reachAverageColor(boids)
     {
       if (boids.length > 0)
@@ -95,6 +99,7 @@ class Boid {
       for (let i = 0; i < targetColor.length; i++) this.color[i] += COLOR_DETLA_VEL * (targetColor[i] - this.color[i]);
     }
 
+    //Finds the birds within a distance away from the bird (not including self)
     findRelevantBoids(boids, processing)
     {
       var canvasPos = this.getCanvasPosition(processing);
@@ -111,6 +116,7 @@ class Boid {
       return relevantBoids;
     }
 
+    //Gets the relative position of the bird on the screen (modulus division)
     getCanvasPosition(processing)
     {
       var pos = new PVector(this.position.x % processing.width, this.position.y % processing.height);
@@ -119,6 +125,7 @@ class Boid {
       return pos;
     }
 
+    //Finds the headings required to avoid obstacles
     getObstacleAvoidanceDelta(obstacles, processing)
     {
       var headingDelta = 0;
@@ -130,6 +137,7 @@ class Boid {
       return headingDelta;
     }
 
+    //Draws the bird
     draw(processing)
     {
       var canvasPosition = this.getCanvasPosition(processing);

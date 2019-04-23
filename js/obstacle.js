@@ -9,6 +9,7 @@ class Obstacle
     this.position = position;
   }
 
+  //Gets the magnitude for a bird's avoidance steering
   getAvoidanceMagnitude(boid, processing)
   {
     var canvasPosition = boid.getCanvasPosition(processing);
@@ -21,6 +22,7 @@ class Obstacle
     else return -avoidanceMagnitude;
   }
 
+  //Draws the obstacle (a circle)
   draw(processing)
   {
     processing.stroke(OBSTACLE_COLOR[0], OBSTACLE_COLOR[1], OBSTACLE_COLOR[2]);
